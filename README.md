@@ -6,6 +6,16 @@ GitHubユーザーの公開鍵はすべて文字通り公開されており、�
 
 このスクリプトはMacOSを前提にしていますが、MacOSに依存する`pbcopy`と`pbpaste`コマンドを変更することで他のOSでも利用できます。
 
+# openssl@3のインストール
+
+MacOS標準の`openssl`では、RSA-OAEP SHA256に対応していないので、Homebrewで`openssl@3`をインストールしてください。
+
+    brew install openssl@3
+
+インストールした`openssl`コマンドを使うため、パスを通す必要があります。
+
+    echo 'export PATH="/opt/homebrew/opt/openssl@3/bin:$PATH"' >> ~/.zshrc
+
 ## githubenc
 
 平文をクリップボードにコピーし、次のコマンドを実行します。パラメータはGitHubユーザー名です。自分のユーザー名などに変更してください。
