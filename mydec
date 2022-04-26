@@ -1,0 +1,6 @@
+#!/bin/sh
+
+MYKEY="$HOME/.ssh/id_rsa.pem"
+
+pbpaste | base64 -D | openssl pkeyutl -decrypt -inkey "$MYKEY" -pkeyopt rsa_padding_mode:oaep -pkeyopt rsa_oaep_md:sha256 | pbcopy
+echo "Plaintext copied to clipboard." 1>&2
