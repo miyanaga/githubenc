@@ -10,7 +10,7 @@ fi
 
 TMP1=$(mktemp)
 TMP2=$(mktemp)
-curl -s https://api.github.com/users/$USER/keys | jq -r .[0].key > "$TMP1"
+curl -s https://api.github.com/users/$USER/keys | jq -r '[.[] | select(.key | startswith("ssh-rsa "))][0].key' > "$TMP1"
 ssh-keygen -e -m PKCS8 -f "$TMP1" > "$TMP2"
 
 pbpaste | openssl pkeyutl -encrypt -pubin -inkey "$TMP2" -pkeyopt rsa_padding_mode:oaep -pkeyopt rsa_oaep_md:sha256 | base64 -b 64 | pbcopy
